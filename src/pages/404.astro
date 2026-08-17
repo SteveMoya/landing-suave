@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout title="Página no encontrada" description="404 — esta página no existe." noindex>
+  <section class="flex min-h-[80svh] flex-col items-center justify-center px-6 text-center">
+    <p class="font-display text-sm font-semibold uppercase tracking-wide text-lilac-deep">Error 404</p>
+    <h1 class="mt-4 font-display text-7xl font-bold tracking-tight text-ink md:text-8xl">
+      Esta página se fue <span class="text-mint-deep">a dormir</span>
+    </h1>
+    <p class="mt-6 max-w-md text-ink/70">
+      No encontramos lo que buscas. Quizá necesitas un descanso — o un enlace correcto.
+    </p>
+    <Button href="/" tone="mint" class="mt-8">
+      Volver a la calma
+    </Button>
+  </section>
+</BaseLayout>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  class?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  as?: 'article' | 'div' | 'li';
+  hover?: boolean;
+}
+
+const { size = 'md', as: Tag = 'div', class: className, hover = false } = Astro.props as Props;
+
+const sizes: Record<string, string> = {
+  sm: 'rounded-2xl p-4',
+  md: 'rounded-3xl p-6',
+  lg: 'rounded-[2rem] p-8',
+  xl: 'rounded-[2.5rem] p-10',
+};
+---
+
+<Tag
+  class:list={[
+    'neu',
+    sizes[size],
+    hover && 'transition-shadow duration-300 hover:shadow-soft-lg',
+    className,
+  ]}
+>
+  <slot />
+</Tag>

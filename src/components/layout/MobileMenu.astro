@@ -1,0 +1,58 @@
+---
+import { site } from '../../data/site';
+import Icon from '../ui/Icon.astro';
+---
+
+<div
+  data-menu
+  id="mobile-menu"
+  class="fixed inset-0 z-40 hidden lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+>
+  <div class="absolute inset-0 bg-sand/95 backdrop-blur-xl"></div>
+
+  <nav class="container-suave relative flex h-full flex-col justify-center gap-2" aria-label="Menú móvil">
+    {
+      site.nav.map((item) => (
+        <a
+          href={item.href}
+          class="neu mb-3 rounded-3xl px-6 py-5 font-display text-3xl font-semibold tracking-tight text-ink"
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <a
+      href="#cta"
+      class="neu-btn mt-6 justify-center px-6 py-4 font-display text-lg font-semibold text-mint-deep"
+    >
+      Descansar gratis
+    </a>
+    <div class="mt-10 flex justify-center gap-4">
+      {
+        site.socials.map((s) => (
+          <a
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.name}
+            class="neu grid h-12 w-12 place-items-center rounded-2xl text-ink/70 transition-all duration-200 hover:text-mint-deep"
+          >
+            <Icon name={s.icon} size={18} />
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+
+  <button
+    data-menu-close
+    type="button"
+    class="absolute right-5 top-5 neu grid h-12 w-12 place-items-center rounded-2xl text-ink"
+    aria-label="Cerrar menú"
+  >
+    <Icon name="close" size={22} />
+  </button>
+</div>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+  ariaLabelledBy?: string;
+}
+
+const { id, ariaLabelledBy, class: className } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={ariaLabelledBy}
+  class:list={['section-pad scroll-mt-20', className]}
+>
+  <div class="container-suave">
+    <slot />
+  </div>
+</section>

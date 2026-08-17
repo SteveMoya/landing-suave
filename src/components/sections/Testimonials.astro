@@ -1,0 +1,54 @@
+---
+import { testimonials } from '../../data/testimonials';
+import Section from '../ui/Section.astro';
+import Icon from '../ui/Icon.astro';
+
+const accentText: Record<string, string> = {
+  mint: 'text-mint-deep',
+  coral: 'text-coral-deep',
+  lilac: 'text-lilac-deep',
+  sky: 'text-sky',
+};
+
+const accentBg: Record<string, string> = {
+  mint: 'bg-mint',
+  coral: 'bg-coral',
+  lilac: 'bg-lilac',
+  sky: 'bg-sky',
+};
+---
+
+<Section id="opiniones" ariaLabelledBy="testimonials-title">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 font-display text-sm font-semibold uppercase tracking-wide text-lilac-deep">Opiniones</p>
+    <h2 id="testimonials-title" class="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+      Noches que <span class="text-mint-deep">cambiaron personas</span>
+    </h2>
+  </div>
+
+  <ul class="grid gap-6 md:grid-cols-3">
+    {
+      testimonials.map((t, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`}>
+          <div class="neu h-full p-7">
+            <div class:list={['flex gap-0.5', accentText[t.accent]]} role="img" aria-label="Valoración: 5 de 5">
+              {Array.from({ length: 5 }).map(() => <Icon name="star" size={16} />)}
+            </div>
+            <blockquote class="mt-4 flex-1 leading-relaxed text-ink/80">
+              “{t.quote}”
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 pt-4">
+              <span class:list={['grid h-11 w-11 place-items-center rounded-2xl font-display text-sm font-bold text-ink', accentBg[t.accent]]}>
+                {t.initials}
+              </span>
+              <div>
+                <p class="font-display text-sm font-bold text-ink">{t.name}</p>
+                <p class="text-xs text-ink/50">{t.role}</p>
+              </div>
+            </figcaption>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

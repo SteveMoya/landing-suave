@@ -1,0 +1,26 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a
+  href="/"
+  aria-label="Suave — inicio"
+  class:list={['group inline-flex items-center gap-2.5', className]}
+>
+  <span
+    class="neu grid h-11 w-11 place-items-center rounded-2xl text-mint-deep transition-shadow duration-300 group-hover:shadow-soft"
+    aria-hidden="true"
+  >
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z" fill="currentColor" stroke="none" />
+      <circle cx="17.5" cy="9" r="0.4" />
+    </svg>
+  </span>
+  <span class="font-display text-2xl font-semibold tracking-tight text-ink transition-opacity duration-200 group-hover:opacity-70">
+    suave
+  </span>
+</a>

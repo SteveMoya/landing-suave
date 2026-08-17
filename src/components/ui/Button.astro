@@ -1,0 +1,53 @@
+---
+interface Props {
+  tone?: 'mint' | 'coral' | 'lilac' | 'sky';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  ariaLabel?: string;
+  class?: string;
+}
+
+const {
+  tone = 'mint',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  ariaLabel,
+  class: className,
+} = Astro.props;
+
+const tones: Record<string, string> = {
+  mint: 'text-mint-deep hover:text-mint-deep',
+  coral: 'text-coral-deep hover:text-coral-deep',
+  lilac: 'text-lilac-deep hover:text-lilac-deep',
+  sky: 'text-sky hover:text-sky',
+};
+
+const sizes: Record<string, string> = {
+  sm: 'px-5 py-2.5 text-sm',
+  md: 'px-8 py-3.5 text-base',
+  lg: 'px-10 py-4 text-lg',
+};
+
+const classes = [
+  'neu-btn disabled:pointer-events-none disabled:opacity-50',
+  tones[tone],
+  sizes[size],
+  className,
+].filter(Boolean).join(' ');
+---
+
+{
+  href ? (
+    <a href={href} class={classes} aria-label={ariaLabel} aria-disabled={disabled || undefined}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} aria-label={ariaLabel} disabled={disabled}>
+      <slot />
+    </button>
+  )
+}

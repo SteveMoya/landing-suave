@@ -1,0 +1,178 @@
+@import "tailwindcss";
+@import "@fontsource/quicksand/500.css";
+@import "@fontsource/quicksand/600.css";
+@import "@fontsource/quicksand/700.css";
+@import "@fontsource/nunito/400.css";
+@import "@fontsource/nunito/600.css";
+@import "@fontsource/nunito/700.css";
+
+/* ============================================================
+   SUAVE DESIGN SYSTEM — Tokens
+   Neumorfismo (soft-ui): superficie = fondo, sombra dual extruida.
+   ============================================================ */
+@theme {
+  /* Tipografía */
+  --font-display: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  /* Suave: fondo y superficies del MISMO tono (clave del neumorfismo) */
+  --color-sand: #e4ebf1; /* fondo azul grisáceo */
+  --color-surface: #e4ebf1; /* misma que el fondo */
+  --color-ink: #3d4b5c; /* texto azul pizarra */
+  --color-ink-soft: #6b7a8c;
+
+  /* Acentos pastel */
+  --color-mint: #7ccfa8;
+  --color-coral: #f2a9a9;
+  --color-lilac: #a49bd6;
+  --color-sky: #8fc9e8;
+  --color-mint-deep: #4fae83;
+  --color-coral-deep: #e07979;
+  --color-lilac-deep: #8578c0;
+
+  /* Sombras neumorfismo: oscura abajo-derecha + clara arriba-izquierda */
+  --shadow-soft: 7px 7px 14px rgb(163 177 198 / 0.65), -7px -7px 14px rgb(255 255 255 / 0.9);
+  --shadow-soft-md: 9px 9px 18px rgb(163 177 198 / 0.65), -9px -9px 18px rgb(255 255 255 / 0.9);
+  --shadow-soft-lg: 12px 12px 24px rgb(163 177 198 / 0.6), -12px -12px 24px rgb(255 255 255 / 0.95);
+  --shadow-soft-inset: inset 6px 6px 12px rgb(163 177 198 / 0.6), inset -6px -6px 12px rgb(255 255 255 / 0.9);
+  --shadow-soft-inset-lg: inset 8px 8px 16px rgb(163 177 198 / 0.6), inset -8px -8px 16px rgb(255 255 255 / 0.9);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-sand font-body text-ink antialiased;
+  }
+
+  ::selection {
+    background: var(--color-mint);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-lilac-deep);
+    outline-offset: 3px;
+    border-radius: 14px;
+  }
+}
+
+/* ============================================================
+   Utilidades de marca
+   ============================================================ */
+@layer components {
+  .container-suave {
+    @apply mx-auto w-full max-w-6xl px-6 lg:px-8;
+  }
+
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+
+  /* Superficie neumórfica extruida */
+  .neu {
+    background: var(--color-surface);
+    border-radius: 28px;
+    box-shadow: var(--shadow-soft-md);
+  }
+
+  .neu-lg {
+    border-radius: 32px;
+    box-shadow: var(--shadow-soft-lg);
+  }
+
+  /* Elemento presionado (estado active / inset) */
+  .neu-pressed {
+    background: var(--color-surface);
+    border-radius: 28px;
+    box-shadow: var(--shadow-soft-inset);
+  }
+
+  .neu-pressed-lg {
+    border-radius: 32px;
+    box-shadow: var(--shadow-soft-inset-lg);
+  }
+
+  /* Botón neumórfico: extruido → se hunde al pulsar */
+  .neu-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-display font-semibold transition-all duration-200;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .neu-btn:hover {
+    box-shadow: var(--shadow-soft-md);
+  }
+
+  .neu-btn:active {
+    box-shadow: var(--shadow-soft-inset);
+    transform: translateY(1px) scale(0.98);
+  }
+
+  /* Toggle neumórfico */
+  .neu-toggle-track {
+    @apply relative h-9 w-16 rounded-full transition-all duration-300;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft-inset);
+  }
+
+  .neu-toggle-thumb {
+    @apply absolute left-1 top-1 h-7 w-7 rounded-full bg-mint transition-all duration-300;
+    box-shadow: 2px 2px 6px rgb(79 174 131 / 0.5);
+  }
+}
+
+/* Header: transparente + scrolled (fuera de @layer) */
+[data-header] {
+  background: transparent;
+}
+
+[data-header].is-scrolled {
+  background: rgb(228 235 241 / 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px) scale(0.99);
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

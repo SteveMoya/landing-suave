@@ -1,0 +1,43 @@
+---
+import { benefits } from '../../data/benefits';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+
+const accentClasses: Record<string, string> = {
+  mint: 'text-mint-deep',
+  coral: 'text-coral-deep',
+  lilac: 'text-lilac-deep',
+  sky: 'text-sky',
+};
+---
+
+<Section id="beneficios" ariaLabelledBy="benefits-title">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 font-display text-sm font-semibold uppercase tracking-wide text-lilac-deep">Beneficios</p>
+    <h2 id="benefits-title" class="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+      Suave trabaja <span class="text-mint-deep">mientras tú no trabajas</span>
+    </h2>
+    <p class="mt-4 text-lg text-ink/70">
+      No es una app más de meditación: es un sistema que acompaña tu noche entera.
+    </p>
+  </div>
+
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      benefits.map((b, index) => (
+        <li data-reveal style={`--reveal-delay:${(index % 3) * 80}ms`}>
+          <Card hover class="group h-full">
+            <span class:list={['grid h-14 w-14 place-items-center rounded-2xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3', accentClasses[b.accent]]}>
+              <span class="neu grid h-14 w-14 place-items-center rounded-2xl">
+                <Icon name={b.icon} size={24} class={accentClasses[b.accent]} />
+              </span>
+            </span>
+            <h3 class="mt-5 font-display text-xl font-bold tracking-tight text-ink">{b.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink/60">{b.description}</p>
+          </Card>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

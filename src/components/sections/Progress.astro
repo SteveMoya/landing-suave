@@ -1,0 +1,57 @@
+---
+import { progress } from '../../data/progress';
+import Section from '../ui/Section.astro';
+
+const accentText: Record<string, string> = {
+  mint: 'text-mint-deep',
+  coral: 'text-coral-deep',
+  lilac: 'text-lilac-deep',
+  sky: 'text-sky',
+};
+
+const accentTrack: Record<string, string> = {
+  mint: 'bg-mint',
+  coral: 'bg-coral',
+  lilac: 'bg-lilac',
+  sky: 'bg-sky',
+};
+
+const accentBar: Record<string, string> = {
+  mint: 'bg-mint-deep',
+  coral: 'bg-coral-deep',
+  lilac: 'bg-lilac-deep',
+  sky: 'bg-sky',
+};
+---
+
+<Section id="progreso" ariaLabelledBy="progress-title" class="!pt-0">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 font-display text-sm font-semibold uppercase tracking-wide text-lilac-deep">Tu progreso</p>
+    <h2 id="progress-title" class="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+      Esta noche fue mejor <span class="text-mint-deep">que la anterior</span>
+    </h2>
+    <p class="mt-4 text-lg text-ink/70">
+      El diario de sueño convierte tus noches en datos que puedes mejorar, sin esfuerzo.
+    </p>
+  </div>
+
+  <div class="neu-lg p-8 md:p-10">
+    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        progress.map((p, index) => (
+          <li data-reveal style={`--reveal-delay:${index * 80}ms`} class="text-center">
+            <p class:list={['font-display text-3xl font-bold tracking-tight', accentText[p.accent]]}>{p.value}</p>
+            <p class="mt-1 text-xs text-ink/50">{p.label}</p>
+            <div class="neu-pressed mt-4 h-3 w-full rounded-full" role="img" aria-label={`${p.label}: ${p.bar}%`}>
+              <div
+                class:list={['h-full rounded-full', accentBar[p.accent]]}
+                style={`width:${p.bar}%`}
+              ></div>
+            </div>
+            <p class:list={['mt-2 font-display text-xs font-bold', accentText[p.accent]]}>▲ {p.trend}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Section>
