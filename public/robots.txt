@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://suave.stevemoya.me/sitemap-index.xml
