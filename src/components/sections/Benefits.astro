@@ -23,6 +23,25 @@ const accentClasses: Record<string, string> = {
     </p>
   </div>
 
+  <!-- Foto real de la luna (Pixabay) en marco neumórfico extruido suave -->
+  <div data-reveal class="neu-lg relative mb-14 overflow-hidden p-4">
+    <div class="relative overflow-hidden rounded-[24px]">
+      <img
+        src="/method-moon.jpg"
+        alt="Luna llena serena sobre un paisaje nocturno en calma"
+        class="aspect-[21/9] w-full object-cover"
+        loading="lazy"
+        decoding="async"
+        width="1280"
+        height="549"
+      />
+      <!-- chip neumórfico suave superpuesto -->
+      <div class="neu absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full px-5 py-2.5">
+        <p class="font-display text-sm font-semibold text-ink/60">✨ Una noche más liviana</p>
+      </div>
+    </div>
+  </div>
+
   <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {
       benefits.map((b, index) => (

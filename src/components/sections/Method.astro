@@ -26,6 +26,31 @@ const dotClasses: Record<string, string> = {
     </h2>
   </div>
 
+  <!-- Vídeo de luna de fondo (Pixabay) en superficie neumórfica extruida (mucha luz) -->
+  <div class="neu-lg relative mb-14 overflow-hidden">
+    <video
+      class="absolute inset-0 h-full w-full object-cover"
+      src="/bg-moon.mp4"
+      poster="/method-moon.jpg"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-hidden="true"
+    ></video>
+    <!-- velo de luz suave neumórfico para legibilidad -->
+    <div class="absolute inset-0 bg-gradient-to-br from-cream/60 via-cream/20 to-transparent" aria-hidden="true"></div>
+    <div class="relative px-6 py-16 text-center sm:py-24">
+      <span class="neu inline-block rounded-full px-5 py-2.5">
+        <p class="font-display text-sm font-semibold text-ink/60">🌙 Un ritual en calma</p>
+      </span>
+      <h3 class="mt-5 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        Tu descanso, paso a paso
+      </h3>
+    </div>
+  </div>
+
   <ol class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
     {
       method.map((step, index) => (
